@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodDelivery.Data
+namespace FoodDelivery.Data.Repository
 {
-    public class Class1
+    class CustomerRepository
     {
     }
 }

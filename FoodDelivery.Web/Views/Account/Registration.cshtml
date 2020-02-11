@@ -1,0 +1,42 @@
+﻿@model FoodDelivery.Web.Models.CustomerInfo
+@{
+    ViewBag.Title = "Registration";
+}
+
+<div class="container">
+    <h1 class="text-center my-3">Create An Account</h1>
+    <div style="font-size:20px">
+        Welcome to our portal. To complete your registration, please provide the information below. If you have an
+        existing account, please @Html.ActionLink("Sign In", "UserLogin", "Account") with those credentials.
+    </div>
+    <div class="my-3">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name..." } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger pl-2" })
+            </div>
+            <div class="form-group row">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name..." } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger pl-2" })
+            </div>
+            <div class="form-group row">
+                @Html.EditorFor(model=>model.Email,new { htmlAttributes = new { @class = "form-control", placeholder = "Email...", @type = "email" } })
+                @Html.ValidationMessageFor(model=>model.Email,"",new { @class="text-danger pl-2"})
+            </div>
+            <div class="form-group row">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes=new { @class="form-control",placeholder="Password...",@type="password"} })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class="text-danger pl-2"})
+            </div>
+            <div class="form-group row">
+                @Html.EditorFor(model=>model.ConfirmPassword,new { htmlAttributes=new{@class="form-control",placeholder="Confirm Password...",@type="password"}})
+                @Html.ValidationMessageFor(model=>model.ConfirmPassword,"",new { @class="text-danger pl-2"})
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+        }
+    </div>
+</div>
