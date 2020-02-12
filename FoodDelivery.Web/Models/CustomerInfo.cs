@@ -11,5 +11,6 @@ namespace FoodDelivery.Web.Models
         [Required]
         [MaxLength(15,ErrorMessage = "Password must be maximum of 15 characters.")]
         public string ConfirmPassword { get; set; }
+
     }
 }
