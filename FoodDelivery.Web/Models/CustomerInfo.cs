@@ -9,7 +9,7 @@ namespace FoodDelivery.Web.Models
     public class CustomerInfo : FoodDelivery.Data.Models.Customer
     {
         [Required]
-        [MaxLength(15,ErrorMessage = "Password must be maximum of 15 characters.")]
+        [MaxLength(15,ErrorMessage = "Password must be maximum size of 15 characters.")]
         public string ConfirmPassword { get; set; }
 
     }
