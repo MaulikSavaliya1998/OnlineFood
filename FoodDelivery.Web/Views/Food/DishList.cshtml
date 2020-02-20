@@ -1,0 +1,37 @@
+﻿@model List<FoodDelivery.Data.Models.Food>
+@{
+    ViewBag.Title = "Food Item";
+}
+
+
+<h2>Food Catalog</h2>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-12">
+                <div class="card product-tile">
+                    <img class="card-img-top mx-auto d-block" src="~/Content/Images/logo.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h6 class="card-title">@item.RestorantName</h6>
+                       
+                        @{
+                            if (@item.Discount != 0)
+                            {
+                                <div><b>₹@item.DiscountPrice</b><span class="m-2"><del>₹@item.Price</del></span></div>
+                                <div class="text-success">@item.Discount %  Off</div>
+                            }
+
+                            else
+                            {
+                                <div class="font-weight-bold mb-2"> price: ₹@item.Price</div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
