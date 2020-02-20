@@ -11,19 +11,29 @@ namespace FoodDelivery.Web.Controllers
 {
     public class AccountController : Controller
     {
-        public ActionResult Login()
+        public ActionResult UserLogin()
         {
             return View();
         }
+        
+        [HttpPost]
+        public ActionResult UserLogin(Login login)
+        {
+            UserRepository userRepository = new UserRepository();
+            userRepository.UserLogin(login);
+            return View();
+        }
 
-        public ActionResult Registration()
+        public ActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registration(Models.CustomerInfo customerInfo)
+        public ActionResult Register(Models.UserInfo user)
         {
+            UserRepository userRepository = new UserRepository();
+            userRepository.Register(user);
             return View();
         }
     }
