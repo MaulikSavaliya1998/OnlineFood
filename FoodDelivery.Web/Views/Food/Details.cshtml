@@ -1,0 +1,53 @@
+﻿
+@model FoodDelivery.Data.Models.Food
+@{
+    ViewBag.Title = "Details";
+}
+@if (Model != null)
+{<h2>Details</h2>
+
+    <div class=" container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 ">
+                <img class="card-img-top w-75 h-75 mx-auto " src="~/Content/Images/FoodDelivery.jpg" alt="Card image cap">
+                @if (Session["User"] != null)
+                {
+                    <div class="ml-5 mt-4">
+                      
+                    </div>
+                }
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+
+                <div class="card-body">
+                    <h4 class="card-title mb-2">@Model.RestorantName</h4>
+                    <div class="text-primary mb-2">@Model.Name</div>
+                    @{
+                        if (@Model.Discount != 0)
+                        {
+                            <div><b>₹@Model.DiscountPrice</b><span class="ml-3"><del>₹@Model.Price</del></span></div>
+
+                            <div class="text-success">@Model.Discount %  Off</div>
+                        }
+                        else
+                        {
+                            <div class="font-weight-bold mb-2"> price: ₹@Model.Price</div>
+
+                        }
+                    }
+                    <p>@Model.Description</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+else
+{
+    <h3 class="text-center mt-5">Data Not Found.</h3>
+}
+
+
+
+

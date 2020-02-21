@@ -277,6 +277,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserLogin.cshtml" />
     <Content Include="Views\Food\Dishlist.cshtml" />
+    <Content Include="Views\Food\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
