@@ -34,9 +34,28 @@ namespace FoodDelivery.Data.Repository
                 con.Close();
             }
         }
-        public void UserLogin(Login login)
+        public User UserLogin(Login login)
         {
-
+            User user = null;
+            using (SqlConnection con = new SqlConnection(ConnectionString))
+            {
+                con.Open();
+                string quary = "select iUserId,vFirstName,vEmailId,IsActive from [User] where vEmailId = @username and vPassword = @password";
+                SqlCommand cmd = new SqlCommand(quary, con);
+                cmd.Parameters.AddWithValue("@username", login.UserName);
+                cmd.Parameters.AddWithValue("@password", login.Password);
+                SqlDataReader userReader = cmd.ExecuteReader();
+                if(userReader.Read())
+                {
+                    user = new User();
+                    user.Id = (int)userReader.GetValue(0);
+                    user.FirstName = (string)userReader.GetValue(1);
+                    user.Email = (string)userReader.GetValue(2);
+                    user.IsActive = (bool)userReader.GetValue(3);
+                }
+                con.Close();
+            }
+            return user;
         }
     }
 }

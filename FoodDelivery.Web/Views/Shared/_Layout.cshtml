@@ -19,8 +19,8 @@
 
             <div class="collapse navbar-collapse ml-5" id="navbarMain">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    <li class="nav-item active">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link " })
                     </li>
                     <li class="nav-item"> 
                         @Html.ActionLink("Dishes","Dishlist","Food",null,new { @class = "nav-link"})
@@ -28,14 +28,44 @@
                     <li class="nav-item">
                         @Html.ActionLink("Restaurants","Index","Home",null,new { @class="nav-link"})
                     </li>
+                    @{ 
+                        if(User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("My Order", "Index", "Order", null, new { @class="nav-link"})
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("My Account", "MyAccount", "Account", null, new { @class="nav-link"})
+                            </li>
+                        }
+                    }
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        @Html.ActionLink("Login","Login","Account",null,new { @class="nav-link"})
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Register", "Register", "Account",null,new { @class="nav-link"})
-                    </li>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item active">
+                                <span class="navbar-text nav-link active">
+                                    @User.Identity.Name
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Logout", "Logout", "Account", null, new { @class="nav-link navbar-text"})
+                            </li>
+                            <li class="nav-item"> 
+                                @Html.ActionLink("Cart", "Index", "FoodCart", null, new { @class="nav-link navbar-text"})
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Login", "UserLogin", "Account", null, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Register", "Register", "Account", null, new { @class = "nav-link" })
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
         </nav>

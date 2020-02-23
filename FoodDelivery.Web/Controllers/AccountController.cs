@@ -20,10 +20,37 @@ namespace FoodDelivery.Web.Controllers
         public ActionResult UserLogin(Login login)
         {
             UserRepository userRepository = new UserRepository();
-            userRepository.UserLogin(login);
-            return View();
+            User user = userRepository.UserLogin(login);
+            if(user != null)
+            {
+                if(user.IsActive.Equals(true))
+                {
+                    string returnUrl = this.Request.QueryString["ReturnUrl"];
+                    Session["User"] = user;
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            login.IsError = true;
+            if(user == null)
+            {
+                ViewData["message"] = "UserName and Password is Invalid";
+            }
+
+            return View(login);
         }
 
+        public ActionResult Logout()
+        {
+            Session["User"] = null;
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Register()
         {
             return View();
@@ -33,7 +60,7 @@ namespace FoodDelivery.Web.Controllers
         public ActionResult Register(Models.UserInfo user)
         {
             UserRepository userRepository = new UserRepository();
-            userRepository.Register(user);
+           // userRepository.Register(user);
             return View();
         }
     }
