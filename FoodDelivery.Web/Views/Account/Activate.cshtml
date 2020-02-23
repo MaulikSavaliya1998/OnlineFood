@@ -1,0 +1,23 @@
+﻿@model FoodDelivery.Data.Models.ActivationResult
+@{
+    ViewBag.Title = "Activate";
+}
+
+@if(Model.IsSuccess)
+{
+    <h2 class="text-center mt-3"> Thank you <b>@Model.FirstName</b>. Your account is activated.</h2>
+
+    <div class="my-5">
+        @Html.ActionLink("Sign In", "UserLogin", "Account", null, new { @class="btn btn-primary btn-large"})
+        @Html.ActionLink("Home", "Index", "Home", null, new { @class="btn btn-primary btn-large"})
+    </div>
+}
+else
+{
+    <h2 class="text-center text-warning"> Oop! Something wrong with account activation</h2>
+
+    <div class="my-5">
+        @Html.ActionLink("RESEND Account Activation Email", "Resend", "Account", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+}
+

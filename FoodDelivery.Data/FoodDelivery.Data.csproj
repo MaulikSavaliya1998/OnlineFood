@@ -58,10 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ActivationResult.cs" />
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\FoodCart.cs" />
+    <Compile Include="Repository\FoodCartRepository.cs" />
     <Compile Include="Repository\FoodRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\RestaurantsRepository.cs" />

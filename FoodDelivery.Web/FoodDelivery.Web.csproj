@@ -281,6 +281,9 @@
     <Content Include="Views\Account\UserLogin.cshtml" />
     <Content Include="Views\Food\Dishlist.cshtml" />
     <Content Include="Views\Food\Details.cshtml" />
+    <Content Include="Views\Account\Confirm.cshtml" />
+    <Content Include="Views\Account\Activate.cshtml" />
+    <Content Include="Views\Account\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

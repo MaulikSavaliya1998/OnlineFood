@@ -60,8 +60,47 @@ namespace FoodDelivery.Web.Controllers
         public ActionResult Register(Models.UserInfo user)
         {
             UserRepository userRepository = new UserRepository();
-           // userRepository.Register(user);
-            return View();
+           Session["code"] = userRepository.Register(user);
+            return RedirectToAction("Confirm");
+        }
+
+        public ActionResult Confirm()
+        {
+            return View((object)Session["code"]);
+        }
+
+        public ActionResult Activate(string code)
+        {
+            UserRepository userRepository = new UserRepository();
+            var result = userRepository.Activate(code);
+            return View(result);
+        }
+
+        [Authorize]
+        public ActionResult MyAccount()
+        {
+            User user = Session["User"] as User;
+            UserRepository userRepository = new UserRepository();
+
+            User data = userRepository.DataRetrive(user.Id);
+            data.Id = user.Id;
+            return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult MyAccount(User usr)
+        {
+            User user = Session["User"] as User;
+
+            UserRepository repository = new UserRepository();
+            repository.MyAccount(usr);
+            User data = repository.DataRetrive(user.Id);
+
+            user.FirstName = data.FirstName;
+
+            Session["User"] = user;
+
+            return RedirectToAction("Index","Home");
         }
     }
 }

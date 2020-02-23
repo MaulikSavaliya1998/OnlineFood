@@ -1,0 +1,14 @@
+﻿@model string
+@{
+    ViewBag.Title = "Confirm";
+}
+
+<h2 class="text-center mt-3">Thank you for Registration ! </h2>
+
+<div class="my-5" style="font-size:20px">
+    We sent email with activation email to your email address. Check your inbox in few mins and click on link to
+    activate your account.
+</div>
+
+@Html.ActionLink("Click here to activate", "Activate", "Account", new { code = Model},null)
+
