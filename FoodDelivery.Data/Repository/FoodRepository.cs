@@ -45,5 +45,37 @@ namespace FoodDelivery.Data.Repository
 			}
 			return FoodItems;
 		}
+		public Food FoodDetails(int Id)
+		{
+			Food food = null;
+			using (SqlConnection con = new SqlConnection(ConnectionString))
+			{
+				con.Open();
+				string query = "select * from [Food] where Id=@foodid";
+				SqlCommand cmd = new SqlCommand(query, con);
+				cmd.Parameters.AddWithValue("@foodid", Id);
+				SqlDataReader sqlDataReader = cmd.ExecuteReader();
+				if (sqlDataReader.Read())
+				{
+					food = new Food();
+					food.Id = (int)sqlDataReader.GetValue(0);
+					food.Name = (string)sqlDataReader.GetValue(1);
+					food.RestorantName = (string)sqlDataReader.GetValue(2);
+					food.Price = Convert.ToDouble(sqlDataReader.GetValue(3));
+					food.Description = (string)sqlDataReader.GetValue(4);
+					if (sqlDataReader.GetValue(5) == DBNull.Value)
+						food.Discount = 0;
+					else
+					{
+						food.Discount = (int)sqlDataReader.GetValue(5);
+					}
+
+				}
+
+				con.Close();
+			}
+
+			return food;
+		}
 	}
 }
