@@ -1,0 +1,79 @@
+﻿@model FoodDelivery.Data.Models.Order
+@{
+
+
+    ViewBag.Title = "OrderDetail";
+}
+@{
+    if (Model.OrderId != 0)
+    {
+        <h3>OrderDetail</h3>
+
+        <div class="bg-warning container row w-100">
+            <div class="col-lg-4 col-md-12 col-12">
+                <label class="font-weight-bold">Order Id :</label> @Model.OrderId <br />
+                <label class="font-weight-bold">Order Date :</label> @Model.OrderDate <br />
+                <label class="font-weight-bold">Order Status :</label> @Model.OrderStatus
+            </div>
+            <div class="col-lg-4 col-md-12 col-12">
+                <label class="font-weight-bold">Total items :</label> @Model.TotalItem <br />
+                <label class="font-weight-bold">Order Total :</label> ₹@Model.OrderTotal <br />
+                <label class="font-weight-bold">Total Discount :</label> ₹@Model.TotalDiscount
+            </div>
+            <div class="col-lg-4 col-md-12 col-12">
+                @if (Model.OrderStatus == "Placed")
+                {
+                    <div class="mt-4 ">
+                        @Html.ActionLink("Cancel Order", "CancelOrder", "Order", new { Id = Model.OrderId }, new { @class = "btn btn-dark" })
+                    </div>
+                }
+            </div>
+        </div>
+        <div>
+            @{
+                <h4 class="mt-3 font-weight-bold"> Order Item</h4>
+                int i = 0;
+                <table class="w-100 text-center">
+                    <tr class="font-weight-bold">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="font-s">Price x Quantity</td>
+                        <td>Line Total</td>
+                    </tr>
+
+                    @foreach (var OrderItem in Model.OrderItemList)
+                    {
+                        i++;
+                        <tr class="border-bottom border-dark">
+                            <td>@i</td>
+                            <td><img src="~/Content/Images/FoodDelivery.jpg" width="100" height="75"></td>
+                            <td><span class="text-primary">@OrderItem.FoodName</span> <br /><span class="text-">(@OrderItem.RestorantName)</span></td>
+                            <td>
+                                <span class="text-danger"> @OrderItem.DiscountPrice.ToString("F")</span> x @OrderItem.FoodQuantity
+                                @if (OrderItem.Discount != 0)
+                                {
+                                    <div><span class="text-success">@OrderItem.Discount % discount on </span><span>₹@OrderItem.FoodPrice</span></div>
+                                }
+                            </td>
+                            <td>₹ @OrderItem.LineTotal.ToString("F")</td>
+                        </tr>
+                    }
+
+                </table>
+            }
+        </div>
+    }
+    else
+    {
+        <h4 class="text-center">Data Not Found.</h4>
+    }
+}
+
+
+
+
+
+
+
+

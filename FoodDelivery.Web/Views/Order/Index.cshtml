@@ -1,0 +1,48 @@
+﻿@model List<FoodDelivery.Data.Models.Order>
+@{
+    ViewBag.Title = "Index";
+}
+@if (Model != null)
+{
+    <h2>MyOrder</h2>
+    <div class="container">
+        <table class="w-100 text-center ">
+            <tr class="bg-info" height="50">
+                <th>Order Id</th>
+                <th class="text-left pl-xl-5">Summary</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+                <tr class="border-bottom border-dark">
+                    <td> @Html.ActionLink(item.OrderId.ToString(), "OrderDetail", "Order", new { Id = item.OrderId }, null)</td>
+                    <td>
+                        <ul>
+
+                            @foreach (var Name in item.OrderItemList)
+                            {
+                                <li class=" text-left">
+                                    @Name.FoodName <br />
+                                </li>
+                            }
+
+                        </ul>
+                    </td>
+                    <td>₹ @item.OrderTotal</td>
+                    <td>@item.OrderStatus</td>
+                    <td> @Html.ActionLink("Order Detail", "OrderDetail", "Order", new { Id = item.OrderId }, null)</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+}
+else
+{
+    <h3 class="text-center mt-5">You Haven't Placed Any Order Yet.</h3>
+}

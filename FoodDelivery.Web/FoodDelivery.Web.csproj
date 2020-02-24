@@ -284,12 +284,13 @@
     <Content Include="Views\Account\Confirm.cshtml" />
     <Content Include="Views\Account\Activate.cshtml" />
     <Content Include="Views\Account\MyAccount.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Views\FoodCart\" />
-    <Folder Include="Views\Order\" />
     <Folder Include="Views\Restaurant\" />
   </ItemGroup>
   <ItemGroup>
