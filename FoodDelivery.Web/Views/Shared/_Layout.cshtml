@@ -26,7 +26,7 @@
                         @Html.ActionLink("Dishes","Dishlist","Food",null,new { @class = "nav-link"})
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Restaurants","Index","Home",null,new { @class="nav-link"})
+                        @Html.ActionLink("Restaurants", "Restorant", "Food",null,new { @class="nav-link"})
                     </li>
                     @{ 
                         if(User.Identity.IsAuthenticated)

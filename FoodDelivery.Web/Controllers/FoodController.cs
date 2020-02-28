@@ -24,5 +24,16 @@ namespace FoodDelivery.Web.Controllers
 			Food Fooddetail = foodRepository.FoodDetails(Id);
 			return View(Fooddetail);
 		}
+		public ActionResult Restorant()
+		{
+			FoodRepository FoodRepository = new FoodRepository();
+			List<Menu> RestorantList = FoodRepository.RestorantList();
+			foreach (var item in RestorantList)
+			{
+				List<FoodItem> menu = FoodRepository.RestorantMenu(item.RestorantName);
+				item.FoodItemList = menu;
+			}
+			return View(RestorantList);
+		}
 	}
 }

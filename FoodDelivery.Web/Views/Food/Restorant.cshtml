@@ -1,0 +1,47 @@
+﻿@model List<FoodDelivery.Data.Models.Menu>
+@{
+
+    ViewBag.Title = "Restorant";
+}
+
+<h2>Restorant Menu</h2><br />
+
+<div class="container-fluid">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <br />
+            <h3>@item.RestorantName</h3><br /><br />
+
+            foreach (var list in item.FoodItemList)
+            {
+                <div class="col-sm-3">
+                    <div class="card">
+                        <img class="card-img-top small" src="~/Content/Images/FoodDelivery.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h6 class="card-title"> @Html.ActionLink(list.Name, "Details", "Food", new { Id = list.Id }, null)</h6>
+                            @item.RestorantName
+                            @{
+                                if (list.Discount != 0)
+                                {
+                                    <div><b>₹@list.DiscountPrice</b><span class="m-2"><del>₹@list.Price</del></span></div>
+                                    <div class="text-success">@list.Discount %  Off</div>
+                                }
+
+                                else
+                                {
+                                    <div class="font-weight-bold mb-2"> price: ₹@list.Price</div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+                                   
+        }
+
+    </div>
+</div>

@@ -77,5 +77,59 @@ namespace FoodDelivery.Data.Repository
 
 			return food;
 		}
+
+		public List<Menu> RestorantList()
+		{
+			List<Menu> RestorantList = new List<Menu>();
+			using (SqlConnection con = new SqlConnection(ConnectionString))
+			{
+				con.Open();
+				string query = "Select Distinct RestorantName from [Food]";
+				SqlCommand cmd = new SqlCommand(query, con);
+				SqlDataReader sqlDataReader = cmd.ExecuteReader();
+				while (sqlDataReader.Read())
+				{
+					Menu restorant = new Menu();
+					restorant.RestorantName = (string)sqlDataReader.GetValue(0);
+					RestorantList.Add(restorant);
+				}
+					con.Close();
+			}
+
+			return RestorantList;
+		}
+
+		public List<FoodItem> RestorantMenu(string restorantname)
+		{
+			List<FoodItem> RestorantMenu = new List<FoodItem>();
+			using (SqlConnection con = new SqlConnection(ConnectionString))
+			{
+				con.Open();
+				string query = "Select Id, Name, Price, Discount, Category from [Food] where RestorantName=@RestorantName";
+				SqlCommand cmd = new SqlCommand(query, con);
+				cmd.Parameters.AddWithValue("@RestorantName",restorantname );
+				SqlDataReader sqlDataReader = cmd.ExecuteReader();
+				while (sqlDataReader.Read())
+				{
+					FoodItem Menu = new FoodItem();
+					Menu.Id = (int)sqlDataReader.GetValue(0);
+					Menu.Name = (string)sqlDataReader.GetValue(1);
+					Menu.Price = Convert.ToDouble(sqlDataReader.GetValue(2));
+					Menu.category = (string)sqlDataReader.GetValue(4);
+					if (sqlDataReader.GetValue(3) == DBNull.Value)
+						Menu.Discount = 0;
+					else
+					{
+						Menu.Discount = (int)sqlDataReader.GetValue(3);
+					}
+
+
+					RestorantMenu.Add(Menu);
+				}
+				con.Close();
+			}
+
+			return RestorantMenu;
+		}
 	}
 }
