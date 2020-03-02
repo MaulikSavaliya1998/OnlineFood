@@ -12,9 +12,9 @@
                 <img class="card-img-top w-75 h-75 mx-auto " src="~/Content/Images/FoodDelivery.jpg" alt="Card image cap">
                 @if (Session["User"] != null)
                 {
-                    <div class="ml-5 mt-4">
-                      
-                    </div>
+                <div class="ml-5 mt-4">
+                    @Html.ActionLink("Add To Cart", "AddToCart", "FoodCart", new { id = Model.Id }, new { @class = "btn btn-primary btn-large w-50 ml-3" })
+                </div>
                 }
             </div>
             <div class="col-lg-6 col-md-6 col-12">

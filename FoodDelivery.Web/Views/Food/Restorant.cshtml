@@ -21,7 +21,6 @@
                         <img class="card-img-top small" src="~/Content/Images/FoodDelivery.jpg" alt="Card image cap">
                         <div class="card-body">
                             <h6 class="card-title"> @Html.ActionLink(list.Name, "Details", "Food", new { Id = list.Id }, null)</h6>
-                            @item.RestorantName
                             @{
                                 if (list.Discount != 0)
                                 {
