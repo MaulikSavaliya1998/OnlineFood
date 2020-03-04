@@ -16,6 +16,8 @@ namespace FoodDelivery.Data.Models
 
 		public string FoodName { get; set; }
 
+		public string RestorantName { get; set; }
+
 		public double Price { get; set; }
 
 

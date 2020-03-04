@@ -27,6 +27,7 @@ namespace FoodDelivery.Web.Controllers
 					Food food = repository.FoodDetails(item.FoodId);
 					item.Price = food.Price;
 					item.FoodName = food.Name;
+					item.RestorantName = food.RestorantName;
 					item.Discount = food.Discount;
 					item.DiscountPrice = food.DiscountPrice;
 

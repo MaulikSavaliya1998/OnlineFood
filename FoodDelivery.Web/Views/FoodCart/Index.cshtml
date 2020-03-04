@@ -26,7 +26,9 @@
                     <div class=" row">
                         @Html.HiddenFor(model => Model[i].FoodId)
                         <div class="col-lg-2"><img class="w-100" src="~/Content/Images/Shoe.jpeg" /></div>
-                        <div class="col-lg-2">@Html.ActionLink(Model[i].FoodName, "Details", "Food", new { Id = Model[i].FoodId }, null)</div>
+                        <div><span class="col-lg-2"> @Html.ActionLink(Model[i].FoodName, "Details", "Food", new { Id = Model[i].FoodId }, null)</span><br />
+                        <span>(@Model[i].RestorantName)</span>
+                        </div>
                         @if (Model[i].Discount == 0)
                         {
                             <div class="col-lg-2 text-danger">₹@Model[i].Price.ToString("F")</div>

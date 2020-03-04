@@ -134,5 +134,53 @@ namespace FoodDelivery.Data.Repository
 				con.Close();
 			}
 		}
+		public int PlaceOrder(Order order)
+		{
+
+			using (SqlConnection con = new SqlConnection(ConnectionString))
+			{
+				con.Open();
+				DateTime Date = DateTime.Now;
+				string Query = "insert into [Order] (UserId,OrderTotal,OrderStatus,OrderDate,TotalItem,TotalDiscount)values(@U_Id,@O_Total,@O_Status,@Date,@T_Item,@T_Discount)";
+				SqlCommand Cmd = new SqlCommand(Query, con);
+				Cmd.Parameters.AddWithValue("@U_Id", order.UserId);
+				Cmd.Parameters.AddWithValue("@O_Total", order.OrderTotal);
+				Cmd.Parameters.AddWithValue("@O_Status", "Placed");
+				Cmd.Parameters.AddWithValue("@Date", Date);
+				Cmd.Parameters.AddWithValue("@T_Item", order.TotalItem);
+				Cmd.Parameters.AddWithValue("@T_Discount", order.TotalDiscount);
+				Cmd.ExecuteNonQuery();
+				Cmd.Dispose();
+
+				string query = "select OrderId from [Order] where OrderDate=@O_Date";
+				SqlCommand command = new SqlCommand(query, con);
+				command.Parameters.AddWithValue("@O_Date", Date);
+				SqlDataReader sqlData = command.ExecuteReader();
+				if (sqlData.Read())
+				{
+					order.OrderId = (int)sqlData.GetValue(0);
+				}
+				command.Dispose();
+				sqlData.Close();
+				foreach (var Item in order.OrderItemList)
+				{
+					string Str = "insert into [OrderItem] (UserId,OrderId,FoodName,RestorantName,FoodPrice,FoodQuantity,Discount) values(@U_Id,@O_Id,@F_Name,@R_Name,@F_Price,@F_Quantity,@Discount)";
+					SqlCommand comand = new SqlCommand(Str, con);
+					comand.Parameters.AddWithValue("@U_Id", order.UserId);
+					comand.Parameters.AddWithValue("@O_Id", order.OrderId);
+					comand.Parameters.AddWithValue("@F_Name", Item.FoodName);
+					comand.Parameters.AddWithValue("@R_Name", Item.RestorantName);
+					comand.Parameters.AddWithValue("@F_Price", Item.FoodPrice);
+					comand.Parameters.AddWithValue("@F_Quantity", Item.FoodQuantity);
+					comand.Parameters.AddWithValue("@Discount", Item.Discount);
+					comand.ExecuteNonQuery();
+
+				}
+
+
+				con.Close();
+			}
+			return order.OrderId;
+		}
 	}
 }

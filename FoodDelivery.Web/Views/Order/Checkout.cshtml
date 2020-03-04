@@ -25,7 +25,8 @@
                 <hr />
                 <div class=" row">
                     <div class="col-lg-3"><img class="w-75" src="~/Content/Images/Shoe.jpeg" /></div>
-                    <div class="col-lg-3">@Html.ActionLink(item.FoodName, "Details", "Product", new { Id = item.FoodId}, null)</div>
+                    <div><span class="col-lg-3"> @Html.ActionLink(item.FoodName, "Details", "Product", new { Id = item.FoodId}, null)</span><br />
+                    (@item.RestorantName)</div>
                     @if (item.Discount == 0)
                     {
                         <div class="col-lg-3"><span class="text-danger">₹@item.FoodPrice.ToString("F")</span> X @item.FoodQuantity</div>
