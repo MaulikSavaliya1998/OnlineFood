@@ -1,0 +1,60 @@
+﻿@model FoodDelivery.Data.Models.Order
+@{
+    ViewBag.Title = "Checkout";
+}
+
+@if (Model != null)
+{
+    
+
+
+    <div class="container">
+        <div class="font-weight-bold h4">
+            Checkout(@Model.TotalItem  Items)
+        </div>
+        <div class="row">
+            <div class="col-lg-3 "></div>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3 font-weight-bold">Price X Quantity</div>
+            <div class="col-lg-3 font-weight-bold   ">Line Total</div>
+        </div>
+        <div class="m-3">
+
+            @foreach (var item in Model.OrderItemList)
+            {
+                <hr />
+                <div class=" row">
+                    <div class="col-lg-3"><img class="w-75" src="~/Content/Images/Shoe.jpeg" /></div>
+                    <div class="col-lg-3">@Html.ActionLink(item.FoodName, "Details", "Product", new { Id = item.FoodId}, null)</div>
+                    @if (item.Discount == 0)
+                    {
+                        <div class="col-lg-3"><span class="text-danger">₹@item.FoodPrice.ToString("F")</span> X @item.FoodQuantity</div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-3"><div class="danger"><span class="text-danger">₹@item.DiscountPrice.ToString("F")</span> X @item.FoodQuantity</div><span class="text-success">@item.Discount% Discount On </span> <span> ₹@item.FoodPrice </span></div>
+                    }
+                    <div class="col-lg-3">₹ @item.LineTotal.ToString("F")</div>
+                </div>
+            }
+            <hr /><hr />
+            <div class="row">
+                <div class="col-lg-4 "> @Html.ActionLink(" Modify ", "Index", "FoodCart", null, new { @class = "btn btn-dark btn-large" })</div>
+                <div class="col-lg-4">
+                    <div class="float-lg-right font-weight-bold">Order Total (@Model.TotalItem items) :<span class="text-danger"> ₹@Model.OrderTotal </span></div>
+                    <div class="float-lg-right">Total Discount : ₹@Model.TotalDiscount.ToString("F")</div>
+                </div>
+                <div class="col-lg-4">   @Html.ActionLink("Place your Order", "PlaceOrder", "Order", null, new { @class = "btn btn-warning btn-large float-right font-weight-bold" })</div>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Checkout</h2>
+

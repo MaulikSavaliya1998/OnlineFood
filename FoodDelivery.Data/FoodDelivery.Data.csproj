@@ -59,7 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ActivationResult.cs" />
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Food.cs" />
+    <Compile Include="Models\ItemQuantity.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

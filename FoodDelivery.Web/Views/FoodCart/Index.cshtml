@@ -1,0 +1,64 @@
+﻿@model List<FoodDelivery.Data.Models.CartItem>
+@{
+    ViewBag.Title = "FoodDelivery";
+}
+
+@if (Model != null)
+{
+    <div class="container">
+        <div class="font-weight-bold h4">
+            Your Shopping Cart
+        </div>
+        <div class="row">
+            <div class="col-lg-2 "></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2 font-weight-bold">Price</div>
+            <div class="col-lg-2 font-weight-bold   ">Quantity</div>
+
+        </div>
+        <div class="m-3">
+            @using (Html.BeginForm())
+            {
+
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    <hr />
+                    <div class=" row">
+                        @Html.HiddenFor(model => Model[i].FoodId)
+                        <div class="col-lg-2"><img class="w-100" src="~/Content/Images/Shoe.jpeg" /></div>
+                        <div class="col-lg-2">@Html.ActionLink(Model[i].FoodName, "Details", "Food", new { Id = Model[i].FoodId }, null)</div>
+                        @if (Model[i].Discount == 0)
+                        {
+                            <div class="col-lg-2 text-danger">₹@Model[i].Price.ToString("F")</div>
+
+                        }
+                        else
+                        {
+                            <div class="col-lg-2"><div class="text-danger">₹@Model[i].DiscountPrice.ToString("F")</div><div class="text-success">@Model[i].Discount% Off</div></div>
+                        }
+                        <div class="col-lg-2 form-group row"> @Html.EditorFor(model => Model[i].Quantity, new { htmlAttributes = new { @class = "form-control", min = 1, max = 10 }, @type = "number" })</div>
+                        <div class="col-lg-2 ">@Html.ActionLink("X", "DeleteCartProduct", "FoodCart", new { Id = Model[i].FoodId }, null)</div>
+                    </div>
+                }
+                <hr /><hr />
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-dark">Save Changes</button>
+
+                    @Html.ActionLink("Proceed To Checkout", "Checkout", "Order", null, new { @class = "btn btn-warning btn-large float-right font-weight-bold" })
+
+                </div>
+            }
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="text-center display-1 mt-3 text-primary">🛒</div>
+        <div class="text-center font-weight-bold mt-3 h4">Your Food Cart is empty</div>
+        <div class="mt-5 h5">Your FoodDelivery lives to serve you. Fill it with Tasty Food.</div>
+        <div class="h4 mt-5">Continue shopping on the  @Html.ActionLink("Product Catalog", "Index", "Food"), learn about present  @Html.ActionLink("Deals", "Deals", "Product") .</div>
+    </div>
+}
