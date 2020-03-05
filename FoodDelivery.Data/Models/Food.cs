@@ -30,7 +30,8 @@ namespace FoodDelivery.Data.Models
 			}
 
 		}
-	}
+        public string Photo { get; set; }
+    }
 	public class Menu
 	{
 
@@ -62,6 +63,6 @@ namespace FoodDelivery.Data.Models
 			}
 
 		}
-
-	}
+        public string Photo { get; set; }
+    }
 }

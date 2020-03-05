@@ -31,8 +31,9 @@ namespace FoodDelivery.Data.Repository
 					Food.RestorantName = (string)sqlDataReader.GetValue(2);
 					Food.Price = Convert.ToDouble(sqlDataReader.GetValue(3));
 					Food.category = (string)sqlDataReader.GetValue(6);
+                    Food.Photo = (string)sqlDataReader.GetValue(7);
 
-					if (sqlDataReader.GetValue(5) == DBNull.Value)
+                    if (sqlDataReader.GetValue(5) == DBNull.Value)
 						Food.Discount = 0;
 					else
 					{
