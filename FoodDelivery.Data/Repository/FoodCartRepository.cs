@@ -56,10 +56,7 @@ namespace FoodDelivery.Data.Repository
 				con.Close();
 			}
 		}
-		public void AddToCart()
-		{
-			throw new NotImplementedException();
-		}
+		
 		public void DeleteItem(int Id)
 		{
 			using (SqlConnection con = new SqlConnection(ConnectionString))
