@@ -21,7 +21,7 @@ namespace FoodDelivery.Data.Repository
 			using (SqlConnection con = new SqlConnection(ConnectionString))
 			{
 				con.Open();
-				string quary = "select OrderId,OrderTotal,OrderStatus from [Order] where UserId=@id";
+				string quary = "select [Order].OrderId,[Order].OrderTotal,[Order].OrderStatus,food.Photo from [Order] inner join CartItem on [Order].UserId=CartItem.UserId inner join food on food.Id=CartItem.FoodId where [Order].UserId=@id";
 				SqlCommand cmd = new SqlCommand(quary, con);
 				cmd.Parameters.AddWithValue("@id", Id);
 				SqlDataReader sqlDataReader = cmd.ExecuteReader();
@@ -35,7 +35,8 @@ namespace FoodDelivery.Data.Repository
 						OrderInfo.OrderId = (int)sqlDataReader.GetValue(0);
 						OrderInfo.OrderTotal = Convert.ToDouble(sqlDataReader.GetValue(1));
 						OrderInfo.OrderStatus = (string)sqlDataReader.GetValue(2);
-						Order.Add(OrderInfo);
+                        OrderInfo.Photo = (string)sqlDataReader.GetValue(3);
+                        Order.Add(OrderInfo);
 
 					}
 				}
@@ -51,7 +52,7 @@ namespace FoodDelivery.Data.Repository
 			using (SqlConnection con = new SqlConnection(ConnectionString))
 			{
 				con.Open();
-				string quary = "select FoodName from [OrderItem] where UserId=@id and OrderId=@OrderId";
+				string quary = "select OrderItem.FoodName,food.Photo from [OrderItem] inner join CartItem on OrderItem.UserId=CartItem.UserId inner join food on food.Id=CartItem.FoodId where OrderItem.UserId=@id and OrderItem.OrderId=@OrderId";
 				SqlCommand cmd = new SqlCommand(quary, con);
 				cmd.Parameters.AddWithValue("@id", UserId);
 				cmd.Parameters.AddWithValue("@OrderId", OrderId);
@@ -61,7 +62,8 @@ namespace FoodDelivery.Data.Repository
 				{
 					OrderItem myorder = new OrderItem();
 					myorder.FoodName = (string)sqlDataReader.GetValue(0);
-					OrderItem.Add(myorder);
+                    myorder.Photo = (string)sqlDataReader.GetValue(1);
+                    OrderItem.Add(myorder);
 				}
 				con.Close();
 			}
@@ -87,8 +89,10 @@ namespace FoodDelivery.Data.Repository
 					Order.OrderDate = (DateTime)sqlDataReader.GetValue(4);
 					Order.TotalItem = (int)sqlDataReader.GetValue(5);
 					Order.TotalDiscount = Convert.ToDouble(sqlDataReader.GetValue(6));
-				}
-				con.Close();
+                   
+
+                }
+                con.Close();
 			}
 			return Order;
 		}
@@ -99,7 +103,7 @@ namespace FoodDelivery.Data.Repository
 			using (SqlConnection con = new SqlConnection(ConnectionString))
 			{
 				con.Open();
-				string quary = "select FoodName,FoodPrice,FoodQuantity,Discount,RestorantName from [OrderItem] where UserId=@id and OrderId=@OrderId";
+				string quary = "select OrderItem.FoodName,OrderItem.FoodPrice,OrderItem.FoodQuantity,OrderItem.Discount,OrderItem.RestorantName,food.Photo from [OrderItem] inner join CartItem on OrderItem.UserId=CartItem.UserId inner join food on food.Id=CartItem.FoodId where OrderItem.UserId=@id and OrderItem.OrderId=@OrderId";
 				SqlCommand cmd = new SqlCommand(quary, con);
 				cmd.Parameters.AddWithValue("@id", UserId);
 				cmd.Parameters.AddWithValue("@OrderId", OrderId);
@@ -113,7 +117,8 @@ namespace FoodDelivery.Data.Repository
 					Orderfood.FoodQuantity = (int)sqlDataReader.GetValue(2);
 					Orderfood.Discount = (int)sqlDataReader.GetValue(3);
 					Orderfood.RestorantName = (string)sqlDataReader.GetValue(4);
-					OrderItem.Add(Orderfood);
+                    Orderfood.Photo = (string)sqlDataReader.GetValue(5);
+                    OrderItem.Add(Orderfood);
 				}
 				con.Close();
 			}

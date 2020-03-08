@@ -88,8 +88,8 @@ namespace FoodDelivery.Web.Controllers
 					orderItem.FoodName = food.Name;
 					orderItem.RestorantName = food.RestorantName;
 					orderItem.FoodQuantity = item.Quantity;
-
-					if (food.Discount == 0)
+                    orderItem.Photo = food.Photo;
+                    if (food.Discount == 0)
 					{
 						orderItem.LineTotal = food.Price * item.Quantity;
 					}

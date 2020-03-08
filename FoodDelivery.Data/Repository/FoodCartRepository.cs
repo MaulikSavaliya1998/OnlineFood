@@ -21,7 +21,7 @@ namespace FoodDelivery.Data.Repository
 			{
 				con.Open();
 
-				string query = "select FoodId,Quantity from [CartItem] where UserId=@id";
+				string query = "select CartItem.FoodId,CartItem.Quantity,food.Photo from [CartItem] inner join [food] on food.Id=CartItem.FoodId  where UserId=@id";
 				SqlCommand cmd = new SqlCommand(query, con);
 				cmd.Parameters.AddWithValue("@id", id);
 				SqlDataReader dataReader = cmd.ExecuteReader();
@@ -33,8 +33,9 @@ namespace FoodDelivery.Data.Repository
 						CartItem cart = new CartItem();
 						cart.FoodId = (int)dataReader.GetValue(0);
 						cart.Quantity = (int)dataReader.GetValue(1);
+                        cart.Photo = (string)dataReader.GetValue(2);
 
-						carts.Add(cart);
+                        carts.Add(cart);
 
 					}
 				}

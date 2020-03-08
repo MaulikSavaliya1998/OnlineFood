@@ -47,7 +47,7 @@
                         i++;
                         <tr class="border-bottom border-dark">
                             <td>@i</td>
-                            <td><img src="~/Content/Images/FoodDelivery.jpg" width="100" height="75"></td>
+                            <td><img src="~/Content/Images/@OrderItem.Photo" width="100" height="75"></td>
                             <td><span class="text-primary">@OrderItem.FoodName</span> <br /><span class="text-">(@OrderItem.RestorantName)</span></td>
                             <td>
                                 <span class="text-danger"> @OrderItem.DiscountPrice.ToString("F")</span> x @OrderItem.FoodQuantity

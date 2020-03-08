@@ -37,8 +37,8 @@ namespace FoodDelivery.Data.Models
 				_DiscountPrice = (Double)(Price - (Price * Discount) / 100);
 			}
 		}
-
-		public double _QuantityPrice;
+        public string Photo { get; set; }
+        public double _QuantityPrice;
 		public double QuantityPrice
 		{
 			get

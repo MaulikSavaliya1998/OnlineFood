@@ -64,7 +64,8 @@ namespace FoodDelivery.Data.Repository
 					food.RestorantName = (string)sqlDataReader.GetValue(2);
 					food.Price = Convert.ToDouble(sqlDataReader.GetValue(3));
 					food.Description = (string)sqlDataReader.GetValue(4);
-					if (sqlDataReader.GetValue(5) == DBNull.Value)
+                    food.Photo = (string)sqlDataReader.GetValue(7);
+                    if (sqlDataReader.GetValue(5) == DBNull.Value)
 						food.Discount = 0;
 					else
 					{
@@ -106,7 +107,7 @@ namespace FoodDelivery.Data.Repository
 			using (SqlConnection con = new SqlConnection(ConnectionString))
 			{
 				con.Open();
-				string query = "Select Id, Name, Price, Discount, Category from [Food] where RestorantName=@RestorantName";
+				string query = "Select Id, Name, Price, Discount, Category, Photo from [Food] where RestorantName=@RestorantName";
 				SqlCommand cmd = new SqlCommand(query, con);
 				cmd.Parameters.AddWithValue("@RestorantName",restorantname );
 				SqlDataReader sqlDataReader = cmd.ExecuteReader();
@@ -117,7 +118,8 @@ namespace FoodDelivery.Data.Repository
 					Menu.Name = (string)sqlDataReader.GetValue(1);
 					Menu.Price = Convert.ToDouble(sqlDataReader.GetValue(2));
 					Menu.category = (string)sqlDataReader.GetValue(4);
-					if (sqlDataReader.GetValue(3) == DBNull.Value)
+                    Menu.Photo = (string)sqlDataReader.GetValue(5);
+                    if (sqlDataReader.GetValue(3) == DBNull.Value)
 						Menu.Discount = 0;
 					else
 					{

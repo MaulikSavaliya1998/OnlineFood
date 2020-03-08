@@ -39,7 +39,9 @@ namespace FoodDelivery.Data.Models
 
 		public List<FoodItem> FoodItemList { get; set; }
 
-	}
+
+
+    }
 
 	public class FoodItem
 	{
