@@ -23,6 +23,7 @@ namespace FoodDelivery.Data.Models
 		public Double TotalDiscount { get; set; }
 
 		public List<OrderItem> OrderItemList { get; set; }
+
         public string Photo { get; set; }
     }
 	public class OrderItem
@@ -38,9 +39,11 @@ namespace FoodDelivery.Data.Models
 		public int FoodQuantity { get; set; }
 
 		public int Discount { get; set; }
+
         public string Photo { get; set; }
     
         public double _LineTotal { get; set; }
+
 		public double LineTotal
 		{
 			get

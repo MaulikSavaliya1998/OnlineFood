@@ -14,7 +14,7 @@
                     <div class="form-group row">
                         <label for="username" class="col-sm-4 col-form-label">User Name:</label>
                         <div class="col-sm-8">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "User Name", @type = "email" } })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "User Name", @type = "email" , autocomplete="off"} })
                             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger pl-2" })
                         </div>
                     </div>

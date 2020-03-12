@@ -114,8 +114,10 @@ namespace FoodDelivery.Web.Controllers
 		{
 			User user = Session["User"] as User;
 			Order order = ShoppingCartToOrder(user);
+           
 			OrderRepository repository = new OrderRepository();
-			int OrderId = repository.PlaceOrder(order);
+            
+            int OrderId = repository.PlaceOrder(order, user.Id);
 			return RedirectToAction("OrderDetail", "Order", new { Id = OrderId });
 		}
 	}
